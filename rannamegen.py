@@ -81,20 +81,20 @@ while stay:
     while not correct:
         surnames=tagsort('surname',namedata,True)
         firstnames=tagsort('surname',namedata,False)
-        genin=raw_input("Is the name A) masculine or B) feminine? ")
-        if genin.lower()=='masc' or genin.lower()=='fem' or genin.lower()=='masculine' or genin.lower()=='feminine' or genin.upper()=='A' or genin.upper()=='B':
+        genin=raw_input("\nIs the name [m]asculine or [f]eminine?\n>")
+        if genin.upper()=='M' or genin.upper()=='F':
             correct=1
-            if genin.lower=='masc' or genin.lower=='masculine' or genin.upper()=='A':
+            if genin.upper()=='M':
                 gender='masc'
             else:
                 gender='fem'
             firstnames=tagsort(gender,firstnames,True)
         else:
-            print "Input invalid, please try again"
+            print "Input invalid, please try again\n"
     done=0
     while not done:
-        addon=raw_input("Would you like to filter by an additional tag?\n If so, type below.\n Otherwise, type no if there is no further preference: ")
-        if addon.lower()=='no':
+        addon=raw_input("additional tag (<tag>/[n]o): ")
+        if addon.lower()=='no' or addon.lower()=='n':
             createname(firstnames,surnames)
             done=1
         else:
@@ -102,13 +102,9 @@ while stay:
             if match:
                 firstnames=tagsort(addon,firstnames,True)
                 surnames=tagsort(addon,surnames,True)
-                wantmore=raw_input("Want to add another tag? ")
-                if wantmore.lower()=='no' or wantmore.lower()=='n' or wantmore=='0':
-                    createname(firstnames,surnames)
-                    done=1
             else:
-                print "Tag not found in database, please try again"
+                print "Tag not found in database"
                 
-    exitstat=raw_input("Another name? ")
+    exitstat=raw_input("Another name? [Y/n]: ")
     if exitstat=='0' or exitstat.lower()=='no' or exitstat.lower()=='n':
         stay=0
